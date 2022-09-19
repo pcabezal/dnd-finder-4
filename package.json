@@ -9,8 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cookies-next": "^2.1.1",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^8.5.1",
     "meta": "^2.2.25",
+    "mongodb": "^4.9.1",
+    "mongoose": "^6.6.1",
     "next": "12.3.0",
+    "next-auth": "^4.10.3",
+    "passport": "^0.6.0",
+    "passport-google-oauth2": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-tinder-card": "^1.5.4"

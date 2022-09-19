@@ -1,6 +1,8 @@
 import Meta from '../components/Meta'
 import Browse from '../components/Browse'
 import CardStyles from '../styles/Cards.module.css';
+import React from "react" 
+React.useLayoutEffect = React.useEffect // stop console error
 
 const aboot = () => {
   return (
