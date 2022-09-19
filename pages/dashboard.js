@@ -30,7 +30,6 @@ function Dashboard({ name, email }) {
   );
 }
 
-
 // ensure login
 export async function getServerSideProps({ req, res }) {
   try {
