@@ -1,10 +1,12 @@
 import { getCookie, removeCookies } from "cookies-next";
-import Head from "next/head";
 import React from "react";
 import connect from "../lib/database";
 import jwt from "jsonwebtoken";
 import User from "../models/User";
 import { useRouter } from "next/router";
+import Browse from '../components/Browse'
+
+React.useLayoutEffect = React.useEffect // stop console error
 
 function Dashboard({ name, email }) {
   const router = useRouter();
@@ -16,16 +18,20 @@ function Dashboard({ name, email }) {
 
   return (
     <div>
-      <Head>
         <title>Dashboard</title>
-      </Head>
-      <div>Welcome {name}!</div>
-      <div>{email}</div>
-      <button onClick={logout}>Logout</button>
+
+        <div>Welcome {name}!</div>
+        <div>{email}</div>
+        <button onClick={logout}>Logout</button>
+
+        <Browse />
+
     </div>
   );
 }
 
+
+// ensure login
 export async function getServerSideProps({ req, res }) {
   try {
     // connect db
