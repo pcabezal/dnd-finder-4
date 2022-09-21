@@ -97,8 +97,10 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
         </div>
 
         <img src={ cloud_url } className={styles.contentimg}></img>
-        
-        { profile_bio }
+        <p>
+            { profile_bio }
+        </p>
+
 
         <form method="post" onSubmit={bioFormSubmit}>
             <p>
@@ -119,15 +121,12 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
             <p>
                 <input type="file" name="file" />
+                {/* UPLOAD PREVIEW */}
+                {/* <img src={imageSrc} className={styles.contentimg}/> */}
+                {imageSrc && !uploadData && (
+                    <button>Upload File</button>
+                )}
             </p>
-            {/* UPLOAD PREVIEW */}
-            <img src={imageSrc} className={styles.contentimg}/>
-            
-            {imageSrc && !uploadData && (
-            <p>
-                <button>Upload Files</button>
-            </p>
-            )}
         </form>
 
     </div>
