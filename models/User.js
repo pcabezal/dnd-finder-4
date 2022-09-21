@@ -5,6 +5,9 @@ const UserSchema = mongoose.Schema({
   email: String,
   googid: String,
   accessToken: String,
+  location: String,
+  profile_bio: String,
+  cloud_url: String,
   tokens: [String],
 });
 

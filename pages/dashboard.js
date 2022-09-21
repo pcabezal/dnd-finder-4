@@ -56,6 +56,7 @@ export async function getServerSideProps({ req, res }) {
       props: {
         email: obj.email,
         name: obj.name,
+        googid: obj.googid
       },
     };
   } catch (err) {

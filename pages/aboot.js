@@ -61,9 +61,10 @@ export default function Aboot({ name, email }) {
 
   return (
     <div>
-      <Meta title='aboot yo' />
-      aboot
+      <Meta title='Your Profile Yo' />
+      Your Profile
       <div>
+      <button onClick={logout}>Logout</button>
         <Browse />
       </div>
 
@@ -94,17 +95,11 @@ export default function Aboot({ name, email }) {
           )}
         </form>
       </main>
-
-      <footer>
-        <p>Find the tutorial on <a href="https://spacejelly.dev/">spacejelly.dev</a>!</p>
-      </footer>
-
-
-
     </div>
   )
 }
 
+// ensure login
 export async function getServerSideProps({ req, res }) {
   try {
     // connect db
