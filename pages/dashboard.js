@@ -19,11 +19,12 @@ function Dashboard({ name, email }) {
   return (
     <div>
         <title>Dashboard</title>
-
+        
         <div>Welcome {name}!</div>
         <div>{email}</div>
         <button onClick={logout}>Logout</button>
-
+        
+        <a href='/profile'>Your Profile</a>
         <Browse />
 
     </div>

@@ -1,14 +1,14 @@
 import connect from "../../../lib/database";
 import User from "../../../models/User";
 
-export default async function updateProfile(req, res) {
+export default async function updateBio(req, res) {
     try {
         await connect();
 
         const test = await User.findOneAndUpdate(
             { googid: req.body.googid },
             {
-              cloud_url: req.body.cloud_url,
+              profile_bio: req.body.profile_bio,
             }
         );
 

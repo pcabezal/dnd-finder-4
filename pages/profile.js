@@ -11,30 +11,23 @@ import styles from '../styles/Profile.module.css'
 React.useLayoutEffect = React.useEffect // stop console error
 
 export default function Profile({ name, email, cloud_url, profile_bio, location, googid }) {
-    // UPDATE PIC //
-
-
-    
-
-
-
-
     // LOGIN AUTH //
     const router = useRouter();
     const logout = () => {
-    removeCookies("token");
-    router.replace("/");
+        removeCookies("token");
+        router.replace("/");
     };
 
     // IMAGE UPLOADING //
     const [imageSrc, setImageSrc] = useState();
     const [uploadData, setUploadData] = useState();
+    const [newProfilePic, newPic] = useState();
 
     function handleOnChange(changeEvent) {
         const reader = new FileReader();
         reader.onload = function(onLoadEvent) {
-        setImageSrc(onLoadEvent.target.result);
-        setUploadData(undefined);
+            setImageSrc(onLoadEvent.target.result);
+            setUploadData(undefined);
         }
         reader.readAsDataURL(changeEvent.target.files[0]);
     }
@@ -57,9 +50,7 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
 
         setImageSrc(data.secure_url);
         setUploadData(data);
-
-        console.log(data);
-        console.log(data.secure_url);
+        
         const updatePic = async () => {
             const res = await fetch('/api/user/user', {
                 method: 'PUT',
@@ -71,50 +62,76 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
                     cloud_url: data.secure_url
                 }),
             });
-    
-            const picData = await res.json();
-            console.log(picData)
+            newPic(data.secure_url);
         }
         updatePic();
     }
 
-  return (
+    // BIO UPDATE
+    async function bioFormSubmit(event) {
+        event.preventDefault();
+        const form = event.currentTarget;
+        const bio = form.elements[0].value;
+
+        const res = await fetch('/api/user/bio', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                googid: {googid}.googid,
+                profile_bio: bio
+            }),
+        });
+
+        form.elements[0].value = ''
+    }
+
+
+    return (
     <div>
-      <Meta title='Your Profile Yo' />
-      {name}'s Profile
-      <div>
-        <button onClick={logout}>Logout</button>
-      </div>
-        <img src={cloud_url} className={styles.contentimg}/>
-      <main>
-        <h1>
-          Image Uploader
-        </h1>
+        <Meta title='Your Profile Yo' />
+        {name}'s Profile
+        <div>
+            <button onClick={logout}>Logout</button>
+        </div>
+
+        <img src={ cloud_url } className={styles.contentimg}></img>
+        
+        { profile_bio }
+
+        <form method="post" onSubmit={bioFormSubmit}>
+            <p>
+                <input type="text" name="bioForm" className={styles.bioForm}/>
+            </p>
+          
+            <p>
+                <button>Submit Bio</button>
+            </p>
+
+        </form>
+
 
         <p>
-          Upload your image to Cloudinary!
+            Upload a new profile image!
         </p>
 
         <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-          <p>
-            <input type="file" name="file" />
-          </p>
-          
-          <img src={imageSrc} className={styles.contentimg}/>
-          
-          {imageSrc && !uploadData && (
             <p>
-              <button>Upload Files</button>
+                <input type="file" name="file" />
             </p>
-          )}
-
-          {uploadData && (
-            <code><pre>{JSON.stringify(uploadData, null, 2)}</pre></code>
-          )}
+            {/* UPLOAD PREVIEW */}
+            <img src={imageSrc} className={styles.contentimg}/>
+            
+            {imageSrc && !uploadData && (
+            <p>
+                <button>Upload Files</button>
+            </p>
+            )}
         </form>
-      </main>
+
     </div>
-  )
+    )
 }
 
 // ensure login
@@ -133,19 +150,21 @@ export async function getServerSideProps({ req, res }) {
 
     const verified = await jwt.verify(token, process.env.JWT_SECRET);
     const obj = await User.findOne({ _id: verified.id });
+
     if (!obj)
       return {
         redirect: {
           destination: "/",
         },
       };
-    console.log('testes' + obj.googid);
+
     return {
       props: {
         email: obj.email,
         name: obj.name,
         googid: obj.googid,
-        cloud_url: obj.cloud_url
+        cloud_url: obj.cloud_url,
+        profile_bio: obj.profile_bio
       },
     };
   } catch (err) {
