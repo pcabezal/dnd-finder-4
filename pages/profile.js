@@ -96,26 +96,28 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
 
 
 
-          <div className="flex-col p-12">    
-            <div className="w-96 mx-auto justify-center flex">
-              <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
-            </div>
+          <div className="flex-col p-12">
 
-            <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 ">
-              <span className="font-semibold text-2xl text-gray-800">{name}</span>
-              <p className="pb-4">
-                { profile_bio }
-              </p>
-              <div className="pt-4 flex justify-around">
-                <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full pt-">
-                  Edit Profile
-                </button>
-
-                <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full pt-">
-                  Logout
-                </button>
+              <div className="w-96 mx-auto justify-center flex shadow-2xl">
+                <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
               </div>
-            </div>
+
+              <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
+                <span className="font-semibold text-2xl text-gray-800">{name}</span>
+                <p className="pb-4">
+                  { profile_bio }
+                </p>
+                <div className="pt-4 flex justify-around">
+                  <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                    Edit Profile
+                  </button>
+
+                  <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                    Logout
+                  </button>
+                </div>
+              </div>
+
           </div>
 
 

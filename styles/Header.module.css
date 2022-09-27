@@ -1,12 +1,13 @@
 .header {
   width: 100%;
-  width: 100%;
   display: flex;
   justify-content: space-evenly;
+  padding-top: 2rem;
 }
 
 .header__icon {
   color: black !important;
+  transform: scale(1.5);
 }  
 
 .header__logo {

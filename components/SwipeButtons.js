@@ -16,19 +16,19 @@ function SwipeButtons() {
     
     <div className={SwipeStyles.swipeButtons}>
       <IconButton className={SwipeStyles.swipeButtons__repeat}>
-        <ReplyIcon fontSize="large" />
+        <ReplyIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
       <IconButton className={SwipeStyles.swipeButtons__left}>
-        <CloseIcon fontSize="large" />
+        <CloseIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
       <IconButton className={SwipeStyles.swipeButtons__star}>
-        <StarIcon fontSize="large" />
+        <StarIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
       <IconButton className={SwipeStyles.swipeButtons__right}>
-        <FavoriteIcon fontSize="large" />
+        <FavoriteIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
       <IconButton className={SwipeStyles.swipeButtons__lightning} onClick={handleClick}>
-        <FlashOnIcon fontSize="large" />
+        <FlashOnIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
     </div>
   )

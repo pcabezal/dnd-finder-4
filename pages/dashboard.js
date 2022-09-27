@@ -21,13 +21,8 @@ function Dashboard({ name, email }) {
 
   return (
     <div className={DashboardStyles.cardContainer}>
-        <title>Dashboard</title>
+        <title>Swipe!</title>
         
-        <div>Welcome {name}!</div>
-        <div>{email}</div>
-        <button onClick={logout}>Logout</button>
-        
-        <a href='/profile'>Your Profile</a>
         <Header />
         <Browse />
         <SwipeButtons />

@@ -21,7 +21,7 @@ function Header() {
 
         <a href='dashboard'>
           <IconButton title='Browse and Swipe'>
-              <ForumIcon className={HeaderStyles.header__icon}/>
+              <ForumIcon fontSize="large" className={HeaderStyles.header__icon}/>
           </IconButton>
         </a>
 
