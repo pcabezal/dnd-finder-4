@@ -16,31 +16,31 @@
 }
 
 .swipeButtons__repeat {
-  padding: 2.5vw !important;
+  padding: 2vw !important;
   color: #f5b748 !important;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
   
 .swipeButtons__left {
-  padding: 2.5vw !important;
+  padding: 2vw !important;
   color: #ec5e6f !important;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
   
 .swipeButtons__star {
-  padding: 2.5vw !important;
+  padding: 2vw !important;
   color: #62b4f9 !important;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
   
 .swipeButtons__right {
-  padding: 2.5vw !important;
+  padding: 2vw !important;
   color: #76e2b3 !important;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }
   
 .swipeButtons__lightning {
-  padding: 2.5vw !important;
+  padding: 2vw !important;
   color: #915dd1 !important;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
 }

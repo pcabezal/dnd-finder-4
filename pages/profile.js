@@ -108,11 +108,11 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
                   { profile_bio }
                 </p>
                 <div className="pt-4 flex justify-around">
-                  <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                  <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
                     Edit Profile
                   </button>
 
-                  <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                  <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
                     Logout
                   </button>
                 </div>

@@ -17,7 +17,7 @@ function Header() {
           </IconButton>
         </a>
 
-        <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='40px' width='40px'/>
+        <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='60px' width='60px'/>
 
         <a href='dashboard'>
           <IconButton title='Browse and Swipe'>
