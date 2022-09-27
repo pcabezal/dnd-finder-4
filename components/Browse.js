@@ -37,7 +37,7 @@ function Browse() {
     }
 
     const outOfFrame = name => {
-        console.log(name + ' left the screen!' + process.env.GREETING);
+        console.log(name + ' left the screen!');
     }
 
     return (

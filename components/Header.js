@@ -9,14 +9,12 @@ import ReplyIcon from '@mui/icons-material/Reply';
 
 function Header() {
   return (
-    <div className='header'>
+    <div className={HeaderStyles.header}>
         <IconButton>
             <ReplyIcon fontSize="large" className={HeaderStyles.header__icon}/>
         </IconButton>
 
-
-
-        <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='40px'/>
+        <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='40px' width='40px'/>
 
         <IconButton>
             <ForumIcon className={HeaderStyles.header__icon}/>

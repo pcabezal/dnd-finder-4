@@ -1,17 +1,14 @@
 .header {
-  position: fixed;
-  bottom: 10vh;
+  width: 100%;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
 }
 
+.header__icon {
+  color: black !important;
+}  
+
 .header__logo {
   object-fit: contain;
-  height: 40px;
-}
-
-.header__icon {
-  padding: 20px;
-  color: black !important;
 }
