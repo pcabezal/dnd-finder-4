@@ -1,4 +1,4 @@
-import { setCookies } from "cookies-next";
+import { setCookie } from "cookies-next";
 import passport from "passport";
 import connect from "../../../lib/database";
 import "../../../lib/passport";
@@ -11,7 +11,7 @@ export default async function (req, res, next) {
     }
 
     // set cookie and send redirect
-    setCookies("token", info.token, {
+    setCookie("token", info.token, {
       req,
       res,
     });

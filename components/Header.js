@@ -10,15 +10,20 @@ import ReplyIcon from '@mui/icons-material/Reply';
 function Header() {
   return (
     <div className={HeaderStyles.header}>
-        <IconButton>
-            <ReplyIcon fontSize="large" className={HeaderStyles.header__icon}/>
-        </IconButton>
+
+        <a href='profile'>
+          <IconButton title='Your Profile'>
+              <Person4Icon fontSize="large" className={HeaderStyles.header__icon} />
+          </IconButton>
+        </a>
 
         <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='40px' width='40px'/>
 
-        <IconButton>
-            <ForumIcon className={HeaderStyles.header__icon}/>
-        </IconButton>
+        <a href='dashboard'>
+          <IconButton title='Browse and Swipe'>
+              <ForumIcon className={HeaderStyles.header__icon}/>
+          </IconButton>
+        </a>
 
     </div>
   )

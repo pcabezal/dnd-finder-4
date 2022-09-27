@@ -12,8 +12,8 @@ import DashboardStyles from '../styles/Dashboard.module.css'
 React.useLayoutEffect = React.useEffect // stop console error
 
 function Dashboard({ name, email }) {
+  // LOGIN AUTH //
   const router = useRouter();
-
   const logout = () => {
     removeCookies("token");
     router.replace("/");

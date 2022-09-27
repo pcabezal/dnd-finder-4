@@ -1,5 +1,5 @@
 import Meta from '../components/Meta'
-import Browse from '../components/Browse'
+import Header from '../components/Header'
 import React from "react" 
 import { getCookie, removeCookies } from "cookies-next";
 import connect from "../lib/database";
@@ -89,47 +89,69 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
 
 
     return (
-    <div>
-        <Meta title='Your Profile Yo' />
-        {name}'s Profile
-        <div>
-            <button onClick={logout}>Logout</button>
-        </div>
-
-        <img src={ cloud_url } className={styles.contentimg}></img>
-        <p>
-            { profile_bio }
-        </p>
+      <div>
+          <Meta title='Your Profile Yo' />
+          <Header />
 
 
-        <form method="post" onSubmit={bioFormSubmit}>
-            <p>
-                <input type="text" name="bioForm" className={styles.bioForm}/>
-            </p>
+
+
+          <div className="flex-col p-12">    
+            <div className="w-96 mx-auto justify-center flex">
+              <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
+            </div>
+
+            <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 ">
+              <span className="font-semibold text-2xl text-gray-800">{name}</span>
+              <p className="pb-4">
+                { profile_bio }
+              </p>
+              <div className="pt-4 flex justify-around">
+                <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full pt-">
+                  Edit Profile
+                </button>
+
+                <button onClick={logout} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full pt-">
+                  Logout
+                </button>
+              </div>
+            </div>
+          </div>
+
+
           
-            <p>
-                <button>Submit Bio</button>
-            </p>
 
-        </form>
+ 
 
 
-        <p>
-            Upload a new profile image!
-        </p>
 
-        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-            <p>
-                <input type="file" name="file" />
-                {/* UPLOAD PREVIEW */}
-                {/* <img src={imageSrc} className={styles.contentimg}/> */}
-                {imageSrc && !uploadData && (
-                    <button>Upload File</button>
-                )}
-            </p>
-        </form>
+          <form method="post" onSubmit={bioFormSubmit}>
+              <p>
+                  <input type="text" name="bioForm" className={styles.bioForm}/>
+              </p>
 
-    </div>
+              <p>
+                  <button>Submit Bio</button>
+              </p>
+
+          </form>
+
+          <p>
+              Upload a new profile image!
+          </p>
+
+          <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+              <p>
+                  <input type="file" name="file" />
+                  {/* UPLOAD PREVIEW */}
+                  {/* <img src={imageSrc} className={styles.contentimg}/> */}
+                  {imageSrc && !uploadData && (
+                      <button>Upload File</button>
+                  )}
+              </p>
+          </form>
+
+      </div>
     )
 }
 
