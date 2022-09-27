@@ -1,27 +1,17 @@
-.title a,
-.title span {
-  color: #0070f3;
-  text-decoration: none;
+.header {
+  position: fixed;
+  bottom: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+.header__logo {
+  object-fit: contain;
+  height: 40px;
 }
 
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
+.header__icon {
+  padding: 20px;
+  color: black !important;
 }

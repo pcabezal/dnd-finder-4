@@ -1,16 +1,29 @@
-import headerStyles from '../styles/Header.module.css'
+import React from 'react';
+import HeaderStyles from '../styles/Header.module.css';
+import Person4Icon from '@mui/icons-material/Person4';
+import { IconButton } from '@mui/material';
+import ForumIcon from '@mui/icons-material/Forum';
+import Image from 'next/image'
+import DragonIcon from '../asset/dragon.png'
+import ReplyIcon from '@mui/icons-material/Reply';
 
-const Header = () => {
+function Header() {
   return (
-    <div>
-      <h1 className={headerStyles.title}>
-        <span>WebDev</span> News
-      </h1>
-      <p className={headerStyles.description}>
-        Keep up yo with yoyoyo
-      </p>
+    <div className='header'>
+        <IconButton>
+            <ReplyIcon fontSize="large" className={HeaderStyles.header__icon}/>
+        </IconButton>
+
+
+
+        <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='40px'/>
+
+        <IconButton>
+            <ForumIcon className={HeaderStyles.header__icon}/>
+        </IconButton>
+
     </div>
   )
 }
 
-export default Header
+export default Header;

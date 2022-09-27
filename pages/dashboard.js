@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User";
 import { useRouter } from "next/router";
 import Browse from '../components/Browse'
+import SwipeButtons from '../components/SwipeButtons'
+import Header from '../components/Header'
+import DashboardStyles from '../styles/Dashboard.module.css'
 
 React.useLayoutEffect = React.useEffect // stop console error
 
@@ -17,7 +20,7 @@ function Dashboard({ name, email }) {
   };
 
   return (
-    <div>
+    <div className={DashboardStyles.cardContainer}>
         <title>Dashboard</title>
         
         <div>Welcome {name}!</div>
@@ -25,7 +28,9 @@ function Dashboard({ name, email }) {
         <button onClick={logout}>Logout</button>
         
         <a href='/profile'>Your Profile</a>
+        <Header />
         <Browse />
+        <SwipeButtons />
 
     </div>
   );
