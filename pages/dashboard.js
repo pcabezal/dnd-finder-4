@@ -8,6 +8,8 @@ import Browse from '../components/Browse'
 import SwipeButtons from '../components/SwipeButtons'
 import Header from '../components/Header'
 import DashboardStyles from '../styles/Dashboard.module.css'
+import Link from 'next/link'
+
 
 React.useLayoutEffect = React.useEffect // stop console error
 
@@ -22,7 +24,7 @@ function Dashboard({ name, email }) {
   return (
     <div className={DashboardStyles.cardContainer}>
         <title>Swipe!</title>
-        
+
         <Header />
         <Browse />
         <SwipeButtons />

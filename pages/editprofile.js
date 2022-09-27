@@ -9,9 +9,8 @@ import { useRouter } from "next/router";
 import { useState } from 'react';
 import styles from '../styles/Profile.module.css'
 React.useLayoutEffect = React.useEffect // stop console error
-import Link from 'next/link'
 
-export default function Profile({ name, email, cloud_url, profile_bio, location, googid }) {
+export default function EditProfile({ name, email, cloud_url, profile_bio, location, googid }) {
     // LOGIN AUTH //
     const router = useRouter();
     const logout = () => {
@@ -93,69 +92,32 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
       <div>
           <Meta title='Your Profile Yo' />
           <Header />
-
-
-
-
           <div className="flex-col p-12">
 
-              <div className="w-96 mx-auto justify-center flex shadow-2xl">
+            <div className="w-96 mx-auto justify-center flex shadow-2xl">
                 <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
-              </div>
+            </div>
 
-              <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
+            <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
                 <span className="font-semibold text-2xl text-gray-800">{name}</span>
                 <p className="pb-4">
-                  { profile_bio }
+                    <form method="post" onSubmit={bioFormSubmit}>
+                        <p>
+                            <input type="text" name="bioForm" className={styles.bioForm}/>
+                        </p>
+                        <p>
+                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                            Update Bio
+                        </button>
+
+                        <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                            Logout
+                        </button>
+                        </p>
+                    </form>
                 </p>
-                <div className="pt-4 flex justify-around">
-                  <Link href='editprofile'>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                      Edit Profile
-                    </button>
-                  </Link>
-
-                  <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                    Logout
-                  </button>
-                </div>
-              </div>
-
+            </div>
           </div>
-
-
-          
-
- 
-
-
-
-          <form method="post" onSubmit={bioFormSubmit}>
-              <p>
-                  <input type="text" name="bioForm" className={styles.bioForm}/>
-              </p>
-
-              <p>
-                  <button>Submit Bio</button>
-              </p>
-
-          </form>
-
-          <p>
-              Upload a new profile image!
-          </p>
-
-          <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-              <p>
-                  <input type="file" name="file" />
-                  {/* UPLOAD PREVIEW */}
-                  {/* <img src={imageSrc} className={styles.contentimg}/> */}
-                  {imageSrc && !uploadData && (
-                      <button>Upload File</button>
-                  )}
-              </p>
-          </form>
-
       </div>
     )
 }

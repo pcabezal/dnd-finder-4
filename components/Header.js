@@ -6,24 +6,28 @@ import ForumIcon from '@mui/icons-material/Forum';
 import Image from 'next/image'
 import DragonIcon from '../asset/dragon.png'
 import ReplyIcon from '@mui/icons-material/Reply';
+import Link from 'next/link';
+
+
+
 
 function Header() {
   return (
     <div className={HeaderStyles.header}>
 
-        <a href='profile'>
+        <Link href='profile'>
           <IconButton title='Your Profile'>
               <Person4Icon fontSize="large" className={HeaderStyles.header__icon} />
           </IconButton>
-        </a>
+        </Link>
 
         <Image src={DragonIcon} className={HeaderStyles.header__logo} alt='dragon' height='60px' width='60px'/>
 
-        <a href='dashboard'>
+        <Link href='dashboard'>
           <IconButton title='Browse and Swipe'>
               <ForumIcon fontSize="large" className={HeaderStyles.header__icon}/>
           </IconButton>
-        </a>
+        </Link>
 
     </div>
   )
