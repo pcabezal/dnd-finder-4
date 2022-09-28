@@ -8,7 +8,8 @@ import User from "../models/User";
 import { useRouter } from "next/router";
 import { useState } from 'react';
 import styles from '../styles/Profile.module.css'
-React.useLayoutEffect = React.useEffect // stop console error
+React.useLayoutEffect = React.useEffect; // stop console error
+import Link from 'next/link';
 
 export default function EditProfile({ name, email, cloud_url, profile_bio, location, googid }) {
     // LOGIN AUTH //
@@ -65,6 +66,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
             newPic(data.secure_url);
         }
         updatePic();
+        router.replace("editprofile");
     }
 
     // BIO UPDATE
@@ -95,27 +97,52 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
           <div className="flex-col p-12">
 
             <div className="w-96 mx-auto justify-center flex shadow-2xl">
-                <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
+                <img src={ cloud_url } className="w-96 h-96 rounded-t-[18px]"></img>
             </div>
 
-            <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
+            <div className="p-4 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
                 <span className="font-semibold text-2xl text-gray-800">{name}</span>
-                <p className="pb-4">
+                <div>
                     <form method="post" onSubmit={bioFormSubmit}>
-                        <p>
-                            <input type="text" name="bioForm" className={styles.bioForm}/>
-                        </p>
-                        <p>
-                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                            Update Bio
-                        </button>
+                        <div className="pt-4">
+                            <textarea name="bioForm" className={styles.bioForm} defaultValue={ profile_bio }/>
+                        </div>
+                        
+                        <div className="pt-4 flex justify-around">
+                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                              Update Bio
+                          </button>
 
-                        <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                            Logout
-                        </button>
-                        </p>
+                          <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                              Logout
+                          </button>
+                        </div>
                     </form>
-                </p>
+
+
+
+                      <div className="flex-col justfify-center text-center pt-3">
+                        <div>
+                          Upload a new profile image
+                        </div>
+
+                        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+                          <div>
+                            <input type="file" name="file" className="cursor-pointer file:cursor-pointer block w-full text-sm file:text-white font-bold file:py-1 file:px-4 file:rounded file:border-1 file:border-blue-500 file:bg-blue-400 file:hover:bg-blue-500" />
+                            {/* UPLOAD PREVIEW */}
+                            {/* <img src={imageSrc} className={styles.contentimg}/> */}
+                            <div className="pt-2 flex justify-center">
+                              {imageSrc && !uploadData && (
+                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">Update Image</button>
+                              )}
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+
+
+
+                </div>
             </div>
           </div>
       </div>

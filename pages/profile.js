@@ -100,7 +100,7 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
           <div className="flex-col p-12">
 
               <div className="w-96 mx-auto justify-center flex shadow-2xl">
-                <img src={ cloud_url } className="w-96 rounded-t-[18px]"></img>
+                <img src={ cloud_url } className="w-96 h-96 rounded-t-[18px]"></img>
               </div>
 
               <div className="p-8 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
@@ -131,29 +131,27 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
 
 
           <form method="post" onSubmit={bioFormSubmit}>
-              <p>
-                  <input type="text" name="bioForm" className={styles.bioForm}/>
-              </p>
-
-              <p>
-                  <button>Submit Bio</button>
-              </p>
-
+            <p>
+              <input type="text" name="bioForm" className={styles.bioForm}/>
+            </p>
+            <p>
+              <button>Submit Bio</button>
+            </p>
           </form>
 
           <p>
-              Upload a new profile image!
+            Upload a new profile image!
           </p>
 
           <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-              <p>
-                  <input type="file" name="file" />
-                  {/* UPLOAD PREVIEW */}
-                  {/* <img src={imageSrc} className={styles.contentimg}/> */}
-                  {imageSrc && !uploadData && (
-                      <button>Upload File</button>
-                  )}
-              </p>
+            <p>
+              <input type="file" name="file" />
+              {/* UPLOAD PREVIEW */}
+              {/* <img src={imageSrc} className={styles.contentimg}/> */}
+              {imageSrc && !uploadData && (
+                  <button>Upload File</button>
+              )}
+            </p>
           </form>
 
       </div>
