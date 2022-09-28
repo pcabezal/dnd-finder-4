@@ -93,10 +93,7 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
       <div>
           <Meta title='Your Profile Yo' />
           <Header />
-
-
-
-
+          
           <div className="flex-col p-12">
 
               <div className="w-96 mx-auto justify-center flex shadow-2xl">
@@ -120,40 +117,7 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
                   </button>
                 </div>
               </div>
-
           </div>
-
-
-          
-
- 
-
-
-
-          <form method="post" onSubmit={bioFormSubmit}>
-            <p>
-              <input type="text" name="bioForm" className={styles.bioForm}/>
-            </p>
-            <p>
-              <button>Submit Bio</button>
-            </p>
-          </form>
-
-          <p>
-            Upload a new profile image!
-          </p>
-
-          <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-            <p>
-              <input type="file" name="file" />
-              {/* UPLOAD PREVIEW */}
-              {/* <img src={imageSrc} className={styles.contentimg}/> */}
-              {imageSrc && !uploadData && (
-                  <button>Upload File</button>
-              )}
-            </p>
-          </form>
-
       </div>
     )
 }
