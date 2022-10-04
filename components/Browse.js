@@ -21,18 +21,8 @@ function Browse() {
         }
     ]);
 
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const req = await axios.get('/cards');
-
-    //         setPeople(req.data);
-    //     }
-
-    //     fetchData();
-    // }, [])
-
     const swiped = (direction, nameToDelete) => {
-        console.log('removing' + nameToDelete);
+        console.log('removing ' + nameToDelete + ' direction: ' + direction);
         // setLastDirection(direction);
     }
 

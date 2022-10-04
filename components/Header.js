@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import HeaderStyles from '../styles/Header.module.css';
 import Person4Icon from '@mui/icons-material/Person4';
 import { IconButton } from '@mui/material';
@@ -9,9 +9,8 @@ import ReplyIcon from '@mui/icons-material/Reply';
 import Link from 'next/link';
 
 
-
-
 function Header() {
+
   return (
     <div className={HeaderStyles.header}>
 

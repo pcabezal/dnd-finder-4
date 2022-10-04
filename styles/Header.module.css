@@ -13,3 +13,9 @@
 .header__logo {
   object-fit: contain;
 }
+
+#tilt {
+  box-shadow: 0 0px 0px rgba(0,0,0,0) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}

@@ -9,7 +9,6 @@ import { useRouter } from "next/router";
 import { useState } from 'react';
 import styles from '../styles/Profile.module.css'
 React.useLayoutEffect = React.useEffect; // stop console error
-import Link from 'next/link';
 
 export default function EditProfile({ name, email, cloud_url, profile_bio, location, googid }) {
     // LOGIN AUTH //
@@ -66,10 +65,12 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
             newPic(data.secure_url);
         }
         updatePic();
-        router.replace("editprofile");
-    }
 
-    // BIO UPDATE
+    }
+    // END IMAGE UPLOADING //
+
+
+    // BIO UPDATE // 
     async function bioFormSubmit(event) {
         event.preventDefault();
         const form = event.currentTarget;
@@ -88,7 +89,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
 
         form.elements[0].value = ''
     }
-
+    // END BIO UPDATE //
 
     return (
       <div>
@@ -108,7 +109,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
                             <textarea name="bioForm" className={styles.bioForm} defaultValue={ profile_bio }/>
                         </div>
                         
-                        <div className="pt-4 flex justify-around">
+                        <div className="pt-4 pb-4 flex justify-around">
                           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
                               Update Bio
                           </button>
@@ -119,10 +120,10 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
                         </div>
                     </form>
 
-
+                    <hr></hr>
 
                       <div className="flex-col justfify-center text-center pt-3">
-                        <div>
+                        <div className="pb-2">
                           Upload a new profile image
                         </div>
 
