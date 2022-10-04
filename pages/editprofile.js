@@ -19,7 +19,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
     };
 
     // IMAGE UPLOADING //
-    const [imageSrc, setImageSrc] = useState();
+    const [imageSrc, setImageSrc] = useState(cloud_url);
     const [uploadData, setUploadData] = useState();
     const [newProfilePic, newPic] = useState();
 
@@ -98,7 +98,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
           <div className="flex-col p-12">
 
             <div className="w-96 mx-auto justify-center flex shadow-2xl">
-                <img src={ cloud_url } className="w-96 h-96 rounded-t-[18px]"></img>
+                <img src={ imageSrc } className="w-96 h-96 rounded-t-[18px]"></img>
             </div>
 
             <div className="p-4 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
