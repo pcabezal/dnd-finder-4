@@ -13,7 +13,7 @@ import Link from 'next/link'
 
 React.useLayoutEffect = React.useEffect // stop console error
 
-function Dashboard({ name, email }) {
+function Dashboard({ name, email, allUser }) {
   // LOGIN AUTH //
   const router = useRouter();
   const logout = () => {
@@ -49,6 +49,8 @@ export async function getServerSideProps({ req, res }) {
 
     const verified = await jwt.verify(token, process.env.JWT_SECRET);
     const obj = await User.findOne({ _id: verified.id });
+    const allUser = await User.find({})
+
     if (!obj)
       return {
         redirect: {
@@ -59,7 +61,7 @@ export async function getServerSideProps({ req, res }) {
       props: {
         email: obj.email,
         name: obj.name,
-        googid: obj.googid
+        googid: obj.googid,
       },
     };
   } catch (err) {

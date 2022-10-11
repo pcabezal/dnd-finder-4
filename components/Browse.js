@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import CardStyles from '../styles/Cards.module.css';
 import TinderCard from 'react-tinder-card';
-// import axios from './axios';
 
-
-function Browse() {
+export default function Browse(props) {
 
     const [people, setPeople] = useState([
         {
@@ -21,8 +19,10 @@ function Browse() {
         }
     ]);
 
+    const [people2, setPeople2] = useState([])
+
     const swiped = (direction, nameToDelete) => {
-        console.log('removing ' + nameToDelete + ' direction: ' + direction);
+        console.log('removing' + nameToDelete + 'direction: ' + direction);
         // setLastDirection(direction);
     }
 
@@ -47,8 +47,11 @@ function Browse() {
                     </TinderCard>
                 ))}
             </div>
+            
         </div>
     )  
 }
 
-export default Browse
+
+
+
