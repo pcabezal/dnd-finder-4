@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import CardStyles from '../styles/Cards.module.css';
 import TinderCard from 'react-tinder-card';
+import { useRouter } from 'next/router'
 
 export default function Browse(props) {
+
+
+    const router = useRouter()
+    const contentType = 'application/json'
 
     const [people, setPeople] = useState([
         {
@@ -19,11 +24,17 @@ export default function Browse(props) {
         }
     ]);
 
-    const [people2, setPeople2] = useState([])
+    useEffect(() => {
+        fetch('/api/user/user')
+            .then((res) => res.json())
+            .then((data) => {                
+                setPeople(data)
+            })
+    }, [])
 
-    const swiped = (direction, nameToDelete) => {
+    const swiped = (direction, nameToDelete, googid) => {
         console.log('removing' + nameToDelete + 'direction: ' + direction);
-        // setLastDirection(direction);
+        console.log(googid);
     }
 
     const outOfFrame = name => {
@@ -32,16 +43,16 @@ export default function Browse(props) {
 
     return (
         <div className={CardStyles.cards}>
-            <div className={CardStyles.cards__cardsContainer}>
+             <div className={CardStyles.cards__cardsContainer}>
                 {people.map((person) => (
                     <TinderCard
                         className={CardStyles.swipe}
                         key={person.name}
                         preventSwipe={['up', 'down']}
-                        onSwipe={(dir) => swiped(dir, person.name)}
+                        onSwipe={(dir) => swiped(dir, person.name, person.googid)}
                         onCardLeftScreen={() => outOfFrame(person.name)}
                     >
-                        <div style={{ backgroundImage: `url(${person.imgUrl})`}} className={CardStyles.card}>
+                        <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
                             <h3>{person.name}</h3>
                         </div>           
                     </TinderCard>

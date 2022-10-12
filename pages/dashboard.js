@@ -13,14 +13,15 @@ import Link from 'next/link'
 
 React.useLayoutEffect = React.useEffect // stop console error
 
-function Dashboard({ name, email, allUser }) {
+function Dashboard(props) {
+ 
   // LOGIN AUTH //
   const router = useRouter();
   const logout = () => {
     removeCookies("token");
     router.replace("/");
   };
-
+  
   return (
     <div className={DashboardStyles.cardContainer}>
         <title>Swipe!</title>
@@ -49,9 +50,10 @@ export async function getServerSideProps({ req, res }) {
 
     const verified = await jwt.verify(token, process.env.JWT_SECRET);
     const obj = await User.findOne({ _id: verified.id });
-    const allUser = await User.find({})
+    const allUser = await User.find({});
 
     if (!obj)
+    
       return {
         redirect: {
           destination: "/",
@@ -61,8 +63,8 @@ export async function getServerSideProps({ req, res }) {
       props: {
         email: obj.email,
         name: obj.name,
-        googid: obj.googid,
-      },
+        googid: obj.googid,  
+      },      
     };
   } catch (err) {
     removeCookies("token", { req, res });
@@ -73,5 +75,6 @@ export async function getServerSideProps({ req, res }) {
     };
   }
 }
+
 
 export default Dashboard;
