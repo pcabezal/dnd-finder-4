@@ -27,19 +27,40 @@ export default function Browse(props) {
     useEffect(() => {
         fetch('/api/user/user')
             .then((res) => res.json())
-            .then((data) => {                
+            .then((data) => {    
+                console.log(data);            
                 setPeople(data)
             })
     }, [])
 
-    const swiped = (direction, nameToDelete, googid) => {
+    const swiped = async (direction, nameToDelete, _id) => {
         console.log('removing' + nameToDelete + 'direction: ' + direction);
-        console.log(googid);
+        console.log(_id);
+        try {
+            const obj = await User.findOne({ _id: _id });
+            console.log(obj);
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     const outOfFrame = name => {
         console.log(name + ' left the screen!');
     }
+
+    // const updatePic = async () => {
+    //     const res = await fetch('/api/user/user', {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({
+    //             googid: {googid}.googid,
+    //             cloud_url: data.secure_url
+    //         }),
+    //     });
+    //     newPic(data.secure_url);
+    // }
 
     return (
         <div className={CardStyles.cards}>
@@ -49,7 +70,7 @@ export default function Browse(props) {
                         className={CardStyles.swipe}
                         key={person.name}
                         preventSwipe={['up', 'down']}
-                        onSwipe={(dir) => swiped(dir, person.name, person.googid)}
+                        onSwipe={(dir) => swiped(dir, person.name, person._id)}
                         onCardLeftScreen={() => outOfFrame(person.name)}
                     >
                         <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>

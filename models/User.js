@@ -8,6 +8,7 @@ const UserSchema = mongoose.Schema({
   location: String,
   profile_bio: String,
   cloud_url: String,
+  likes: [String],
   tokens: [String],
 });
 

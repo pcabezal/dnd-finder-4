@@ -9,6 +9,9 @@ import SwipeButtons from '../components/SwipeButtons'
 import Header from '../components/Header'
 import DashboardStyles from '../styles/Dashboard.module.css'
 import Link from 'next/link'
+import { useEffect, useState } from 'react';
+import CardStyles from '../styles/Cards.module.css';
+import TinderCard from 'react-tinder-card';
 
 
 React.useLayoutEffect = React.useEffect // stop console error
@@ -21,13 +24,57 @@ function Dashboard(props) {
     removeCookies("token");
     router.replace("/");
   };
+
+  const [people, setPeople] = useState([])
+
+  useEffect(() => {
+    fetch('/api/user/user')
+        .then((res) => res.json())
+        .then((data) => {    
+            console.log(data);            
+            setPeople(data)
+        })
+  }, [])
+
+
+  const swiped = (direction, nameToDelete, _id) => {
+    console.log('removing' + nameToDelete + 'direction: ' + direction);
+    console.log(_id)
+      
+
+  }
+
+  const outOfFrame = name => {
+    console.log(name + ' left the screen!');
+  }
   
   return (
     <div className={DashboardStyles.cardContainer}>
         <title>Swipe!</title>
 
         <Header />
-        <Browse />
+
+
+        <div className={CardStyles.cards}>
+             <div className={CardStyles.cards__cardsContainer}>
+                {people.map((person) => (
+                    <TinderCard
+                        className={CardStyles.swipe}
+                        key={person.name}
+                        preventSwipe={['up', 'down']}
+                        onSwipe={(dir) => swiped(dir, person.name, person._id)}
+                        onCardLeftScreen={() => outOfFrame(person.name)}
+                    >
+                        <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
+                            <h3>{person.name}</h3>
+                        </div>           
+                    </TinderCard>
+                ))}
+            </div>        
+        </div>
+
+
+        
         <SwipeButtons />
 
     </div>
