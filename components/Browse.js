@@ -9,20 +9,7 @@ export default function Browse(props) {
     const router = useRouter()
     const contentType = 'application/json'
 
-    const [people, setPeople] = useState([
-        {
-            name: 'fetorn jones',
-            imgUrl: 'https://www.indiewire.com/wp-content/uploads/2013/10/adventure-time.png'
-        },
-        {
-            name: 'bob minske',
-            imgUrl: 'https://m.media-amazon.com/images/M/MV5BMTQyMDQ0MjA4M15BMl5BanBnXkFtZTgwNDM3ODAyMzE@._V1_.jpg'
-        },
-        {
-            name: 'yolandee smith',
-            imgUrl: 'https://m.media-amazon.com/images/M/MV5BMTVmMTU2YWItYThhOS00OTFhLTgxNzktNjI0YjgzOWJlZWM4XkEyXkFqcGdeQXRyYW5zY29kZS13b3JrZmxvdw@@._V1_.jpg'
-        }
-    ]);
+    const [people, setPeople] = useState([]);
 
     useEffect(() => {
         fetch('/api/user/user')
@@ -33,15 +20,32 @@ export default function Browse(props) {
             })
     }, [])
 
+    const putData = async (form) => {
+        const { id } = router.query
+    
+        try {
+          const res = await fetch(`/api/user/${id}`, {
+            method: 'PUT',
+            headers: {
+              Accept: contentType,
+              'Content-Type': contentType,
+            },
+            body: JSON.stringify(form),
+          })
+    
+          // Throw error with status code in case Fetch API req failed
+          if (!res.ok) {
+            throw new Error(res.status)
+          }
+        } catch (error) {
+          setMessage('Failed to update card')
+        }
+    }
+
     const swiped = async (direction, nameToDelete, _id) => {
         console.log('removing' + nameToDelete + 'direction: ' + direction);
         console.log(_id);
-        try {
-            const obj = await User.findOne({ _id: _id });
-            console.log(obj);
-        } catch(err) {
-            console.log(err);
-        }
+        putData(_id, );
     }
 
     const outOfFrame = name => {
@@ -78,8 +82,7 @@ export default function Browse(props) {
                         </div>           
                     </TinderCard>
                 ))}
-            </div>
-            
+            </div>        
         </div>
     )  
 }

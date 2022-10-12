@@ -30,18 +30,35 @@ function Dashboard(props) {
   useEffect(() => {
     fetch('/api/user/user')
         .then((res) => res.json())
-        .then((data) => {    
-            console.log(data);            
+        .then((data) => {               
             setPeople(data)
         })
   }, [])
 
+  const putData = async (id, userId) => {
+    try {
+      const res = await fetch(`/api/user/${id}`, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({id: id, userId: userId}),
+      })
+
+      // Throw error with status code in case Fetch API req failed
+      if (!res.ok) {
+        throw new Error(res.status)
+      }
+    } catch (error) {
+      console.log('Failed to update card', error);
+    }
+  }
 
   const swiped = (direction, nameToDelete, _id) => {
     console.log('removing' + nameToDelete + 'direction: ' + direction);
-    console.log(_id)
-      
-
+    console.log(_id, props.userId)
+    putData(_id, props.userId)
   }
 
   const outOfFrame = name => {
@@ -97,7 +114,6 @@ export async function getServerSideProps({ req, res }) {
 
     const verified = await jwt.verify(token, process.env.JWT_SECRET);
     const obj = await User.findOne({ _id: verified.id });
-    const allUser = await User.find({});
 
     if (!obj)
     
@@ -110,7 +126,8 @@ export async function getServerSideProps({ req, res }) {
       props: {
         email: obj.email,
         name: obj.name,
-        googid: obj.googid,  
+        googid: obj.googid, 
+        userId: verified.id 
       },      
     };
   } catch (err) {
