@@ -7,10 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import { IconButton } from '@mui/material';
 
-function SwipeButtons() {
-  function handleClick() {
-    console.log('increment fetor count');
-  }
+function SwipeButtons({isActive, onShow}) {
 
   return (
     
@@ -24,10 +21,10 @@ function SwipeButtons() {
       <IconButton className={SwipeStyles.swipeButtons__star}>
         <StarIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
-      <IconButton className={SwipeStyles.swipeButtons__right}>
+      <IconButton className={SwipeStyles.swipeButtons__right} onClick={onShow}>
         <FavoriteIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
-      <IconButton className={SwipeStyles.swipeButtons__lightning} onClick={handleClick}>
+      <IconButton className={SwipeStyles.swipeButtons__lightning}>
         <FlashOnIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
     </div>

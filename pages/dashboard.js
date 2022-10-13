@@ -25,6 +25,8 @@ function Dashboard(props) {
     router.replace("/");
   };
 
+  const [activeIndex, setActiveIndex] = useState(1);
+
   const [people, setPeople] = useState([])
 
   useEffect(() => {
@@ -64,38 +66,46 @@ function Dashboard(props) {
   const outOfFrame = name => {
     console.log(name + ' left the screen!');
   }
-  
-  return (
-    <div className={DashboardStyles.cardContainer}>
+  if (activeIndex == 1) {
+    return (
+      <div className={DashboardStyles.cardContainer}>
+          <title>Swipe!</title>
+
+          <Header />     
+          <div className={CardStyles.cards}>
+              <div className={CardStyles.cards__cardsContainer}>
+                  {people.map((person) => (
+                      <TinderCard
+                          className={CardStyles.swipe}
+                          key={person.name}
+                          preventSwipe={['up', 'down']}
+                          onSwipe={(dir) => swiped(dir, person.name, person._id)}
+                          onCardLeftScreen={() => outOfFrame(person.name)}
+                      >
+                          <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
+                              <h3>{person.name}</h3>
+                          </div>           
+                      </TinderCard>
+                  ))}
+              </div>        
+          </div>
+          <SwipeButtons 
+            isActive={activeIndex === 0}
+            onShow={() => setActiveIndex(0)}
+          />
+
+      </div>
+    );
+  } else {
+    return (
+      <div>
         <title>Swipe!</title>
 
-        <Header />
-
-
-        <div className={CardStyles.cards}>
-             <div className={CardStyles.cards__cardsContainer}>
-                {people.map((person) => (
-                    <TinderCard
-                        className={CardStyles.swipe}
-                        key={person.name}
-                        preventSwipe={['up', 'down']}
-                        onSwipe={(dir) => swiped(dir, person.name, person._id)}
-                        onCardLeftScreen={() => outOfFrame(person.name)}
-                    >
-                        <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
-                            <h3>{person.name}</h3>
-                        </div>           
-                    </TinderCard>
-                ))}
-            </div>        
-        </div>
-
-
-        
+        <Header /> 
         <SwipeButtons />
-
-    </div>
-  );
+      </div>
+    )
+  }
 }
 
 // ensure login
