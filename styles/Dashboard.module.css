@@ -32,6 +32,23 @@ pointer-events: none;
     color: #61dafb;
 }
 
+.carouselContainer {
+    height: 650px;
+    margin-top: 20px;
+}
+
+.alice-carousel__stage {
+    display: flex;
+    height: 600px;
+}
+.alice-carousel__stage-item {
+    height: 600px;
+}
+.item {
+    background: #ccc;
+    height: 600px;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);

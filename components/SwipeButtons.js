@@ -7,7 +7,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
 import { IconButton } from '@mui/material';
 
-function SwipeButtons({isActive, onShow}) {
+function SwipeButtons({isActive, onShow, onShow2}) {
 
   return (
     
@@ -21,10 +21,10 @@ function SwipeButtons({isActive, onShow}) {
       <IconButton className={SwipeStyles.swipeButtons__star}>
         <StarIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
-      <IconButton className={SwipeStyles.swipeButtons__right} onClick={onShow}>
+      <IconButton className={SwipeStyles.swipeButtons__right} onClick={onShow} title='Your likes'>
         <FavoriteIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
-      <IconButton className={SwipeStyles.swipeButtons__lightning}>
+      <IconButton className={SwipeStyles.swipeButtons__lightning} onClick={onShow2} title='Back to browse'>
         <FlashOnIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
     </div>

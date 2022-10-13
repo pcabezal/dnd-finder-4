@@ -12,6 +12,8 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react';
 import CardStyles from '../styles/Cards.module.css';
 import TinderCard from 'react-tinder-card';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 
 React.useLayoutEffect = React.useEffect // stop console error
@@ -28,14 +30,31 @@ function Dashboard(props) {
   const [activeIndex, setActiveIndex] = useState(1);
 
   const [people, setPeople] = useState([])
+  const [likes, setLikes] = useState([])
 
+  let liked = []
+  
   useEffect(() => {
     fetch('/api/user/user')
-        .then((res) => res.json())
-        .then((data) => {               
-            setPeople(data)
-        })
+      .then((res) => res.json())
+      .then((data) => {               
+          setPeople(data);
+
+          const result = data.filter(obj => {
+            return obj._id === props.userId
+          })[0].likes
+
+          result.forEach( el => {
+            let filtered = data.filter(obj => obj._id === el)[0];
+            if (filtered) liked.push(filtered);
+          })
+      })
+      .then(() => {
+        setLikes(liked)
+      })
   }, [])
+
+  console.log('likes yo', likes);
 
   const putData = async (id, userId) => {
     try {
@@ -66,6 +85,28 @@ function Dashboard(props) {
   const outOfFrame = name => {
     console.log(name + ' left the screen!');
   }
+
+
+  // CAROUSEL //
+  const handleDragStart = (e) => e.preventDefault();
+
+  const items = [
+    <img src="https://i.pinimg.com/originals/41/76/2e/41762e88e304995dd743d7ffe55c66c9.jpg" onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item} />,
+    <img src="https://i.pinimg.com/736x/ea/93/20/ea932047f66f8728f80824ff065bbb89.jpg" onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item}/>,
+    <img src="https://i.pinimg.com/originals/41/76/2e/41762e88e304995dd743d7ffe55c66c9.jpg" onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item}/>,
+    <img src="https://i.pinimg.com/474x/a7/9e/fd/a79efd9f13877d7ba4ac240d4c21e4fd.jpg" onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item}/>,
+    <img src="https://i.pinimg.com/originals/41/76/2e/41762e88e304995dd743d7ffe55c66c9.jpg" onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item}/>,
+  ];
+
+
+
+  const responsive = {
+    0: { items: 1 },
+    0: { items: 2 },
+    0: { items: 3 },
+  };
+
+
   if (activeIndex == 1) {
     return (
       <div className={DashboardStyles.cardContainer}>
@@ -92,16 +133,27 @@ function Dashboard(props) {
           <SwipeButtons 
             isActive={activeIndex === 0}
             onShow={() => setActiveIndex(0)}
+            onShow2={() => setActiveIndex(1)}
           />
 
       </div>
     );
-  } else {
+  } else if (activeIndex == 0) {
     return (
       <div>
-        <title>Swipe!</title>
+        <title>Your likes</title>
 
         <Header /> 
+
+        <div className={DashboardStyles.carouselContainer}>
+          <AliceCarousel 
+            mouseTracking items={items} 
+            responsive={responsive}
+            controlsStrategy="alternate"
+            infinite='true'
+          />
+        </div>
+
         <SwipeButtons />
       </div>
     )

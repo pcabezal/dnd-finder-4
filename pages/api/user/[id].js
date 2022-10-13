@@ -38,7 +38,17 @@ export default async function handler(req, res) {
             res.json({ error });
           }
           break;
+        case 'GET':
+          try {
 
+            const test = await User.findById(req.body.userId);
+      
+            res.status(200).json({ success: true, data: test })
+          } catch (error) {
+            console.log(error);
+            res.json({ error });
+          }
+          break;
     }
 
 
