@@ -48,7 +48,6 @@ function Dashboard(props) {
       onceOnly = 0;
     }
   }, [])
-  console.log('likes', likes);
 
   // ADD LIKES WITH SWIPES//
   const putData = async (id, userId) => {
