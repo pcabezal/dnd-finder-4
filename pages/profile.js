@@ -118,6 +118,9 @@ export default function Profile({ name, email, cloud_url, profile_bio, location,
                 </div>
               </div>
           </div>
+
+          
+
       </div>
     )
 }

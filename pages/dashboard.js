@@ -14,12 +14,13 @@ import CardStyles from '../styles/Cards.module.css';
 import TinderCard from 'react-tinder-card';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-
+import EditProfile2 from '../components/EditProfile2'
+import Profile from '../components/Profile'
 
 React.useLayoutEffect = React.useEffect // stop console error
 
 function Dashboard(props) {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState('browse');
   const [people, setPeople] = useState([])
   const [likes, setLikes] = useState([])
 
@@ -96,47 +97,110 @@ function Dashboard(props) {
     0: { items: 3 },
   };
 
+  // COMPONENT CONDITIONAL RENDERING //
+  function renderSwitch(param) {
+    switch(param) {
+      case 'browse': return (
+        <>
+          <div className={CardStyles.cards}>
+            <div className={CardStyles.cards__cardsContainer}>
+                {people.map((person) => (
+                    <TinderCard
+                        className={CardStyles.swipe}
+                        key={person.name}
+                        preventSwipe={['up', 'down']}
+                        onSwipe={(dir) => swiped(dir, person.name, person._id)}
+                        // onCardLeftScreen={() => outOfFrame(person.name)}
+                    >
+                        <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
+                            <h3>{person.name}</h3>
+                        </div>           
+                    </TinderCard>
+                ))}
+            </div>        
+          </div>
+        </>
+      )
+      case 'profile': return (
+        <Profile {...props}/>
+      )
+      case 'edit': return (
+        <EditProfile2 {...props}/>
+      )
+      case 'likes': return (
+        <div className={DashboardStyles.carouselContainer}>
+          <AliceCarousel 
+            mouseTracking items={items} 
+            responsive={responsive}
+            controlsStrategy="alternate"
+            infinite='true'
+            disableButtonsControls='true'
+          />
+        </div>
+      )
+    }
+  }
+
+  // render! //
     return (
       <div className={DashboardStyles.cardContainer}>
           <title>Swipe!</title>
 
           <Header />   
 
-          {activeIndex ? (
-            <div className={CardStyles.cards}>
-              <div className={CardStyles.cards__cardsContainer}>
-                  {people.map((person) => (
-                      <TinderCard
-                          className={CardStyles.swipe}
-                          key={person.name}
-                          preventSwipe={['up', 'down']}
-                          onSwipe={(dir) => swiped(dir, person.name, person._id)}
-                          // onCardLeftScreen={() => outOfFrame(person.name)}
-                      >
-                          <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
-                              <h3>{person.name}</h3>
-                          </div>           
-                      </TinderCard>
-                  ))}
-              </div>        
-            </div>
-          ): (
-            <div className={DashboardStyles.carouselContainer}>
-              <AliceCarousel 
-                mouseTracking items={items} 
-                responsive={responsive}
-                controlsStrategy="alternate"
-                infinite='true'
-                disableButtonsControls='true'
-              />
-            </div>
-          )}
+          {/* {activeIndex ? (
+            <>
+              <div className={CardStyles.cards}>
+                <div className={CardStyles.cards__cardsContainer}>
+                    {people.map((person) => (
+                        <TinderCard
+                            className={CardStyles.swipe}
+                            key={person.name}
+                            preventSwipe={['up', 'down']}
+                            onSwipe={(dir) => swiped(dir, person.name, person._id)}
+                            // onCardLeftScreen={() => outOfFrame(person.name)}
+                        >
+                            <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
+                                <h3>{person.name}</h3>
+                            </div>           
+                        </TinderCard>
+                    ))}
+                </div>        
+              </div>
 
-          <SwipeButtons 
-            isActive={activeIndex === 0}
-            onShow={() => setActiveIndex(0)}
-            onShow2={() => setActiveIndex(1)}
-          />
+            </>
+          ): (
+
+
+
+
+
+            <EditProfile2 {...props}/>
+
+
+            // <div className={DashboardStyles.carouselContainer}>
+            //   <AliceCarousel 
+            //     mouseTracking items={items} 
+            //     responsive={responsive}
+            //     controlsStrategy="alternate"
+            //     infinite='true'
+            //     disableButtonsControls='true'
+            //   />
+            // </div>
+
+
+          )} */}
+
+
+              {renderSwitch(activeIndex)}
+
+              <SwipeButtons 
+                isActive={activeIndex === 0}
+                onShowBrowse={() => setActiveIndex('browse')}
+                onShowProfile={() => setActiveIndex('profile')}
+                onShowEdit={() => setActiveIndex('edit')}
+                onShowLikes={() => setActiveIndex('likes')}
+              />
       </div>
     );
 }
@@ -167,10 +231,13 @@ export async function getServerSideProps({ req, res }) {
       };
     return {
       props: {
-        email: obj.email,
         name: obj.name,
-        googid: obj.googid, 
-        userId: verified.id 
+        email: obj.email,
+        cloud_url: obj.cloud_url,
+        profile_bio: obj.profile_bio,
+        likes: obj.likes,
+        userId: verified.id,
+        googid: obj.googid
       },      
     };
   } catch (err) {

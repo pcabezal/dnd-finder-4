@@ -2,15 +2,15 @@ import Meta from '../components/Meta'
 import Header from '../components/Header'
 import React from "react" 
 import { getCookie, removeCookies } from "cookies-next";
-import connect from "../lib/database";
-import jwt from "jsonwebtoken";
-import User from "../models/User";
+// import connect from "../lib/database";
+// import jwt from "jsonwebtoken";
+// import User from "../models/User";
 import { useRouter } from "next/router";
 import { useState } from 'react';
 import styles from '../styles/Profile.module.css'
 React.useLayoutEffect = React.useEffect; // stop console error
 
-export default function EditProfile({ name, email, cloud_url, profile_bio, googid }) {
+function EditProfile2({ userId, name, cloud_url, profile_bio, googid }) {
     // LOGIN AUTH //
     const router = useRouter();
     const logout = () => {
@@ -94,7 +94,6 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, googi
     return (
       <div>
           <Meta title='Your Profile Yo' />
-          <Header />
           <div className="flex-col p-12">
 
             <div className="w-96 mx-auto justify-center flex shadow-2xl">
@@ -150,45 +149,4 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, googi
     )
 }
 
-// ensure login
-export async function getServerSideProps({ req, res }) {
-  try {
-    // connect db
-    await connect();
-    // check cookie
-    const token = getCookie("token", { req, res });
-    if (!token)
-      return {
-        redirect: {
-          destination: "/",
-        },
-      };
-
-    const verified = await jwt.verify(token, process.env.JWT_SECRET);
-    const obj = await User.findOne({ _id: verified.id });
-
-    if (!obj)
-      return {
-        redirect: {
-          destination: "/",
-        },
-      };
-
-    return {
-      props: {
-        email: obj.email,
-        name: obj.name,
-        googid: obj.googid,
-        cloud_url: obj.cloud_url,
-        profile_bio: obj.profile_bio
-      },
-    };
-  } catch (err) {
-    removeCookies("token", { req, res });
-    return {
-      redirect: {
-        destination: "/",
-      },
-    };
-  }
-}
+export default EditProfile2
