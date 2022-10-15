@@ -87,7 +87,7 @@ export default function EditProfile({ name, email, cloud_url, profile_bio, locat
             }),
         });
 
-        form.elements[0].value = ''
+        form.elements[0].value = bio
     }
     // END BIO UPDATE //
 

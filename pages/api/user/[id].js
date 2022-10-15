@@ -12,6 +12,7 @@ export default async function handler(req, res) {
     switch (method) {
         case 'PUT':
           try {
+            
             const test = await User.findByIdAndUpdate(req.body.userId,
               { $push: { likes: req.body.id}}
             );
@@ -26,8 +27,7 @@ export default async function handler(req, res) {
           try {
             const test = await User.findOneAndUpdate(
                 { googid: req.body.googid },
-                {
-                  cloud_url: req.body.cloud_url,
+                {cloud_url: req.body.cloud_url,
                 }
             );
       
