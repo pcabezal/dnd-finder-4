@@ -11,3 +11,10 @@
 #fileupload {
     display: none;
 }
+
+.editContainer {
+    margin-top: 5rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center;
+}

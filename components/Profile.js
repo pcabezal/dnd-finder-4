@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 React.useLayoutEffect = React.useEffect // stop console error
 import Link from 'next/link'
 
-function Profile({ name, cloud_url, profile_bio }) {
+function Profile({ name, cloud_url, profile_bio, onShowEdit }) {
     // LOGIN AUTH //
     const router = useRouter();
     const logout = () => {
@@ -29,11 +29,11 @@ function Profile({ name, cloud_url, profile_bio }) {
                   { profile_bio }
                 </p>
                 <div className="pt-4 flex justify-around">
-                  <Link href='editprofile'>
-                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md" onClick={onShowEdit}>
                       Edit Profile
                     </button>
-                  </Link>
+
 
                   <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
                     Logout

@@ -1,5 +1,5 @@
-import Meta from '../components/Meta'
-import Header from '../components/Header'
+import Meta from './Meta'
+import Header from './Header'
 import React from "react" 
 import { getCookie, removeCookies } from "cookies-next";
 // import connect from "../lib/database";
@@ -10,7 +10,7 @@ import { useState } from 'react';
 import styles from '../styles/Profile.module.css'
 React.useLayoutEffect = React.useEffect; // stop console error
 
-function EditProfile2({ userId, name, cloud_url, profile_bio, googid }) {
+function EditProfile({ userId, name, cloud_url, profile_bio, googid }) {
     // LOGIN AUTH //
     const router = useRouter();
     const logout = () => {
@@ -92,61 +92,59 @@ function EditProfile2({ userId, name, cloud_url, profile_bio, googid }) {
     // END BIO UPDATE //
 
     return (
-      <div>
-          <Meta title='Your Profile Yo' />
-          <div className="flex-col p-12">
+        <div className='peepoo'>
 
-            <div className="w-96 mx-auto justify-center flex shadow-2xl">
-                <img src={ imageSrc } className="w-96 h-96 rounded-t-[18px]"></img>
-            </div>
+            {/* real stuff */}
+             <div className={styles.editContainer}>
+                <Meta title='Your Profile Yo' />
+                <div className="">
+                    <img src={ imageSrc } className="rounded-l-[18px] w-96"></img>
+                </div>
 
-            <div className="p-4 bg-white mx-auto rounded-b-[18px] w-96 shadow-2xl">
-                <span className="font-semibold text-2xl text-gray-800">{name}</span>
-                <div>
-                    <form method="post" onSubmit={bioFormSubmit}>
-                        <div className="pt-4">
-                            <textarea name="bioForm" className={styles.bioForm} defaultValue={ profile_bio }/>
-                        </div>
-                        
-                        <div className="pt-4 pb-4 flex justify-around">
-                          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                              Update Bio
-                          </button>
-
-                          <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
-                              Logout
-                          </button>
-                        </div>
-                    </form>
-
-                    <hr></hr>
-
-                      <div className="flex-col justfify-center text-center pt-3">
-                        <div className="pb-2">
-                          Upload a new profile image
-                        </div>
-
-                        <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
-                          <div>
-                            <input type="file" name="file" className="cursor-pointer file:cursor-pointer block w-full text-sm file:text-white font-bold file:py-1 file:px-4 file:rounded file:border-1 file:border-blue-500 file:bg-blue-400 file:hover:bg-blue-500" />
-                            {/* UPLOAD PREVIEW */}
-                            {/* <img src={imageSrc} className={styles.contentimg}/> */}
-                            <div className="pt-2 flex justify-center">
-                              {imageSrc && !uploadData && (
-                                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">Update Image</button>
-                              )}
+                <div className="p-4 bg-white rounded-r-[18px] w-96 shadow-2xl">
+                    <span className="font-semibold text-2xl text-gray-800">{name}</span>
+                    <div>
+                        <form method="post" onSubmit={bioFormSubmit}>
+                            <div className="pt-4">
+                                <textarea name="bioForm" className={styles.bioForm} defaultValue={ profile_bio }/>
                             </div>
-                          </div>
+                            
+                            <div className="pt-4 pb-4 flex justify-around">
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                                Update Bio
+                            </button>
+
+                            <button onClick={logout} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">
+                                Logout
+                            </button>
+                            </div>
                         </form>
-                      </div>
 
+                        <hr></hr>
 
+                        <div className="flex-col justfify-center text-center pt-3">
+                            <div className="pb-2">
+                                Upload a new profile image
+                            </div>
 
+                            <form method="post" onChange={handleOnChange} onSubmit={handleOnSubmit}>
+                                <div>
+                                    <input type="file" name="file" className="cursor-pointer file:cursor-pointer block w-full text-sm file:text-white font-bold file:py-1 file:px-4 file:rounded file:border-1 file:border-blue-500 file:bg-blue-400 file:hover:bg-blue-500" />
+                                    <div className="pt-2 flex justify-center">
+                                    {imageSrc && !uploadData && (
+                                        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-md">Update Image</button>
+                                    )}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-          </div>
+            {/* end of real stuff */}
+        
       </div>
     )
 }
 
-export default EditProfile2
+export default EditProfile

@@ -14,7 +14,7 @@ import CardStyles from '../styles/Cards.module.css';
 import TinderCard from 'react-tinder-card';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import EditProfile2 from '../components/EditProfile2'
+import EditProfile from '../components/EditProfile'
 import Profile from '../components/Profile'
 
 React.useLayoutEffect = React.useEffect // stop console error
@@ -84,7 +84,7 @@ function Dashboard(props) {
   // }
 
 
-  // ALICE CAROUSEL //
+  // LIKES CAROUSEL //
   const handleDragStart = (e) => e.preventDefault();
 
   let items = likes.map((like) => (
@@ -122,10 +122,10 @@ function Dashboard(props) {
         </>
       )
       case 'profile': return (
-        <Profile {...props}/>
+        <Profile {...props} onShowEdit={() => setActiveIndex('edit')}/>
       )
       case 'edit': return (
-        <EditProfile2 {...props}/>
+        <EditProfile {...props} />
       )
       case 'likes': return (
         <div className={DashboardStyles.carouselContainer}>
@@ -148,59 +148,14 @@ function Dashboard(props) {
 
           <Header />   
 
-          {/* {activeIndex ? (
-            <>
-              <div className={CardStyles.cards}>
-                <div className={CardStyles.cards__cardsContainer}>
-                    {people.map((person) => (
-                        <TinderCard
-                            className={CardStyles.swipe}
-                            key={person.name}
-                            preventSwipe={['up', 'down']}
-                            onSwipe={(dir) => swiped(dir, person.name, person._id)}
-                            // onCardLeftScreen={() => outOfFrame(person.name)}
-                        >
-                            <div style={{ backgroundImage: `url(${person.cloud_url})`}} className={CardStyles.card}>
-                                <h3>{person.name}</h3>
-                            </div>           
-                        </TinderCard>
-                    ))}
-                </div>        
-              </div>
+          {renderSwitch(activeIndex)}
 
-            </>
-          ): (
-
-
-
-
-
-            <EditProfile2 {...props}/>
-
-
-            // <div className={DashboardStyles.carouselContainer}>
-            //   <AliceCarousel 
-            //     mouseTracking items={items} 
-            //     responsive={responsive}
-            //     controlsStrategy="alternate"
-            //     infinite='true'
-            //     disableButtonsControls='true'
-            //   />
-            // </div>
-
-
-          )} */}
-
-
-              {renderSwitch(activeIndex)}
-
-              <SwipeButtons 
-                isActive={activeIndex === 0}
-                onShowBrowse={() => setActiveIndex('browse')}
-                onShowProfile={() => setActiveIndex('profile')}
-                onShowEdit={() => setActiveIndex('edit')}
-                onShowLikes={() => setActiveIndex('likes')}
-              />
+          <SwipeButtons 
+            onShowBrowse={() => setActiveIndex('browse')}
+            onShowProfile={() => setActiveIndex('profile')}
+            onShowEdit={() => setActiveIndex('edit')}
+            onShowLikes={() => setActiveIndex('likes')}
+          />
       </div>
     );
 }
