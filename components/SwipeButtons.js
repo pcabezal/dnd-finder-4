@@ -5,6 +5,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import StarIcon from "@mui/icons-material/Star";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FlashOnIcon from "@mui/icons-material/FlashOn";
+import ForumIcon from '@mui/icons-material/Forum';
+import Person4Icon from '@mui/icons-material/Person4';
+import EditIcon from '@mui/icons-material/Edit';
 import { IconButton } from '@mui/material';
 import Link from 'next/link';
 
@@ -18,17 +21,17 @@ function SwipeButtons({onShowBrowse, onShowProfile, onShowEdit, onShowLikes}) {
       </IconButton> */}
 
       <IconButton className={SwipeStyles.swipeButtons__left} onClick={onShowEdit} title='Edit Profile'>
-        <CloseIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
+        <EditIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton> 
 
       <IconButton className={SwipeStyles.swipeButtons__star} onClick={onShowProfile} title='Your Profile'>
-        <StarIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
+        <Person4Icon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
 
       <IconButton className={SwipeStyles.swipeButtons__right} onClick={onShowLikes} title='Your Likes'>
         <FavoriteIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
-      <IconButton className={SwipeStyles.swipeButtons__lightning} onClick={onShowBrowse} title='Back to Browse'>
+      <IconButton className={SwipeStyles.swipeButtons__lightning} onClick={onShowBrowse} title='Browse and Swipe'>
         <FlashOnIcon fontSize="large" className={SwipeStyles.swipeButtons__all}/>
       </IconButton>
     </div>
