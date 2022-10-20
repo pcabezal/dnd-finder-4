@@ -26,13 +26,14 @@ function Dashboard(props) {
 
   let liked = []
   let onceOnly = 1;
-  useEffect(() => {
 
+  // populate list of users to swipe on //
+  useEffect(() => {
     if (onceOnly) {
       fetch('/api/user/user')
       .then((res) => res.json())
       .then((data) => {               
-          setPeople(data);
+          setPeople(data.filter(person => person._id !== props.userId));
 
           const result = data.filter(obj => {
             return obj._id === props.userId
@@ -73,6 +74,7 @@ function Dashboard(props) {
 
   const swiped = (direction, nameToDelete, _id) => {
     console.log(direction + ' on ' + nameToDelete);
+
     if (direction=='right' && !likes.some(obj => obj._id == _id)) {
       liked.push(_id)
       putData(_id, props.userId)

@@ -11,11 +11,11 @@ export default function Browse(props) {
 
     const [people, setPeople] = useState([]);
 
+    let pee
     useEffect(() => {
         fetch('/api/user/user')
             .then((res) => res.json())
             .then((data) => {    
-                console.log(data);            
                 setPeople(data)
             })
     }, [])
@@ -46,30 +46,18 @@ export default function Browse(props) {
         console.log('removing' + nameToDelete + 'direction: ' + direction);
         console.log(_id);
         putData(_id, );
+        console.log('yoyoyo');
     }
 
     const outOfFrame = name => {
-        console.log(name + ' left the screen!');
+        console.log(name + ' left the screen!' + pee);
     }
-
-    // const updatePic = async () => {
-    //     const res = await fetch('/api/user/user', {
-    //         method: 'PUT',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             googid: {googid}.googid,
-    //             cloud_url: data.secure_url
-    //         }),
-    //     });
-    //     newPic(data.secure_url);
-    // }
 
     return (
         <div className={CardStyles.cards}>
              <div className={CardStyles.cards__cardsContainer}>
                 {people.map((person) => (
+                    
                     <TinderCard
                         className={CardStyles.swipe}
                         key={person.name}
@@ -81,6 +69,7 @@ export default function Browse(props) {
                             <h3>{person.name}</h3>
                         </div>           
                     </TinderCard>
+
                 ))}
             </div>        
         </div>
