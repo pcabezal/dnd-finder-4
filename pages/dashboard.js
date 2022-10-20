@@ -27,7 +27,7 @@ function Dashboard(props) {
   let liked = []
   let onceOnly = 1;
 
-  // populate list of users to swipe on //
+  // POPULATE LIST TO SWIPE //
   useEffect(() => {
     if (onceOnly) {
       fetch('/api/user/user')
@@ -93,12 +93,6 @@ function Dashboard(props) {
     <img src={like.cloud_url}  onDragStart={handleDragStart} role="presentation" className={DashboardStyles.item}/>
   ))
 
-  const responsive = {
-    0: { items: 1 },
-    0: { items: 2 },
-    0: { items: 3 },
-  };
-
   // COMPONENT CONDITIONAL RENDERING //
   function renderSwitch(param) {
     switch(param) {
@@ -133,10 +127,11 @@ function Dashboard(props) {
         <div className={DashboardStyles.carouselContainer}>
           <AliceCarousel 
             mouseTracking items={items} 
-            responsive={responsive}
             controlsStrategy="alternate"
             infinite='true'
             disableButtonsControls='true'
+            autoWidth='true'
+            paddingLeft='10'
           />
         </div>
       )

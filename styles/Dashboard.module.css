@@ -39,16 +39,10 @@ pointer-events: none;
     margin-top: 20px;
 }
 
-.alice-carousel__stage {
-    display: flex;
-    height: 600px;
-}
-.alice-carousel__stage-item {
-    height: 600px;
-}
 .item {
     background: #ccc;
     height: 600px;
+    padding: 2px;
 }
 
 @keyframes App-logo-spin {
